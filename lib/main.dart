@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iiii/constant.dart';
+import 'package:iiii/controller/login/cubit/cubit.dart';
 import 'package:iiii/view/screen/on_boarding_screen.dart';
 
 
 void main() {
-  runApp(const MyApp());
+  BlocOverrides.runZoned(() {
+    runApp(MyApp());
+  },
+    blocObserver: MyBlocObserver(),
+
+  );
 }
 
 class MyApp extends StatelessWidget {
