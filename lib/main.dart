@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iiii/constant.dart';
 import 'package:iiii/controller/login/cubit/cubit.dart';
+import 'package:iiii/controller/login/service/dio_hellper.dart';
 import 'package:iiii/view/screen/on_boarding_screen.dart';
 
 
 void main() {
+  DioHelper.init();
   BlocOverrides.runZoned(() {
     runApp(MyApp());
   },
