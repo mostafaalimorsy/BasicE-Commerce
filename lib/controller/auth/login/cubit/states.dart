@@ -10,3 +10,6 @@ class ShopAppErrorStates extends ShopAppLoginStates {
   ShopAppErrorStates(this.error);
 
 }
+
+class ShopChangPasswordVisabilityStates extends ShopAppLoginStates {}
+

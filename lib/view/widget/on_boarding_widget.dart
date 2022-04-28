@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:iiii/model/boarding_model.dart';
+import 'package:iiii/model/boarding/boarding_model.dart';
 
 Widget onBoarding (BoardingModel model) {
 
