@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iiii/controller/auth/login/cubit/states.dart';
-import 'package:iiii/controller/auth/login/service/dio_hellper.dart';
+import 'package:iiii/controller/service/dio_hellper.dart';
+import 'package:iiii/model/auth/login_model.dart';
 
 import 'package:iiii/model/end_point.dart';
 
@@ -11,29 +12,32 @@ class ShopLoginCubit extends Cubit<ShopAppLoginStates> {
 
   static ShopLoginCubit get(context) => BlocProvider.of(context);
 
-  List<dynamic> get_login = [];
-  List<dynamic> post_login = [];
+  ShopLoginModel? PostLogin ;
   IconData suffix = Icons.visibility_outlined ;
   bool password = true;
 
-  void getLogin({required String? email, required String? password}) async {
+
+  //// Auth data TO API
+  void getLogin({required String? email, required String? password,required String? name, required String? phone}) async {
     emit(ShopAppLoadingStates());
     DioHelper?.getDataAPI(
       url: Login,
       query: {
-        'email': email,
+        'email':  email,
         'password': password,
+        'name':name,
+        'phone':phone,
       },
     ).then((value) {
-      emit(ShopAppScuccessStates());
-      get_login.add(value);
+      // emit(ShopAppScuccessStates());
+      var get_login = ShopLoginModel.fromjson(value.data);
       print(get_login);
     }).catchError((error){
       emit(ShopAppErrorStates(error.toString()));
     });
 
   }
-
+  // Auth data from API
   void postLogin({required String email , required String password })  {
     emit(ShopAppLoadingStates());
     DioHelper?.postDataAPI(
@@ -43,15 +47,17 @@ class ShopLoginCubit extends Cubit<ShopAppLoginStates> {
         'password': password,
       },
     ).then((value){
-      emit(ShopAppScuccessStates());
-      post_login.add(value);
-      print(post_login);
+      emit(ShopAppScuccessStates(ShopLoginModel.fromjson(value.data)));
+      PostLogin = ShopLoginModel.fromjson(value.data);
+      print(PostLogin?.message);
     }).catchError((error){
       emit(ShopAppErrorStates(error.toString()));
+      print(error.toString());
     });
 
   }
 
+  //To change Password Visiability
   void changPasswordVisiability( ){
     password = !password;
     suffix = password ?  Icons.visibility_outlined : Icons.visibility_off_outlined   ;
@@ -62,29 +68,3 @@ class ShopLoginCubit extends Cubit<ShopAppLoginStates> {
 }
 
 
-
-class MyBlocObserver extends BlocObserver {
-  @override
-  void onCreate(BlocBase bloc) {
-    super.onCreate(bloc);
-    print('onCreate -- ${bloc.runtimeType}');
-  }
-
-  @override
-  void onChange(BlocBase bloc, Change change) {
-    super.onChange(bloc, change);
-    print('onChange -- ${bloc.runtimeType}, $change');
-  }
-
-  @override
-  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
-    print('onError -- ${bloc.runtimeType}, $error');
-    super.onError(bloc, error, stackTrace);
-  }
-
-  @override
-  void onClose(BlocBase bloc) {
-    super.onClose(bloc);
-    print('onClose -- ${bloc.runtimeType}');
-  }
-}

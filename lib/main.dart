@@ -1,42 +1,70 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iiii/constant.dart';
-
+import 'package:iiii/controller/service/bloc_observe.dart';
+import 'package:iiii/controller/service/dio_hellper.dart';
+import 'package:iiii/controller/shop/cubit/cubit.dart';
+import 'package:iiii/controller/shop/cubit/states.dart';
+import 'package:iiii/theme.dart';
+import 'package:iiii/view/screen/home_screen.dart';
+import 'package:iiii/view/screen/login_screen.dart';
 import 'package:iiii/view/screen/on_boarding_screen.dart';
+import 'controller/service/cash_helper.dart';
 
-import 'controller/auth/login/cubit/cubit.dart';
-import 'controller/auth/login/service/dio_hellper.dart';
-
-
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
-  BlocOverrides.runZoned(() {
-    runApp(MyApp());
-  },
-    blocObserver: MyBlocObserver(),
+  await CachHelper.init();
 
+  Widget widget;
+  bool isSkiped = CachHelper.getData(key: 'onBoarding');
+  bool?  token = CachHelper.getData(key: 'token');
+  print(isSkiped);
+
+  if (isSkiped != null) {
+    if(token != null) {
+      widget = const HomeScreen();
+    } else {
+      widget = LoginScreen();
+    }
+  }else{
+    widget = OnBoardingScreen();
+  }
+
+  BlocOverrides.runZoned(
+    () {
+      runApp(MyApp(widget: widget));
+    },
+    blocObserver: MyBlocObserver(),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+   Widget? widget;
+
+  MyApp(
+     {
+    Key? key,  this.widget,
+  }) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Shop App',
-      theme: ThemeData(
-        fontFamily: "general_font",
-        primarySwatch: defaultColor,
-      ),
-      darkTheme: ThemeData(
-        primarySwatch: defaultColor,
-        fontFamily: "general_fontC",
-      ),
-      home: OnBoardingScreen(),
-    );
+    return BlocProvider(
+      create: (context)=> ShopCubit()..getHomeData(),
+      child: BlocConsumer <ShopCubit ,ShopStates> (
+        listener: (BuildContext context, ShopStates state) {  },
+        builder: (BuildContext context, ShopStates state) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Shop App',
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            themeMode: ThemeMode.light,
+            home: widget,
+          );
+        },
 
+      ),
+    );
   }
 }
