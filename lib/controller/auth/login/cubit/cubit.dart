@@ -29,9 +29,9 @@ class ShopLoginCubit extends Cubit<ShopAppLoginStates> {
         'phone':phone,
       },
     ).then((value) {
-      // emit(ShopAppScuccessStates());
+       emit(ShopAppScuccessStates(PostLogin!));
       var get_login = ShopLoginModel.fromjson(value.data);
-      print(get_login);
+      print(get_login.data?.image.toString());
     }).catchError((error){
       emit(ShopAppErrorStates(error.toString()));
     });

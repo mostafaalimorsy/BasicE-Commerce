@@ -16,18 +16,13 @@ class HomeModel
 class HomeDataModel
 {
   List<BannerModel>? banners = [];
-  List<ProductModel>? product= [];
+  List<BannerModel>? product= [];
 
 
   HomeDataModel.fromjson(Map<String,dynamic> json)
   {
-    json['banners'].foreach((element){
-      banners!.add(element);
-    });
-
-    json['product'].foreach((element){
-      product!.add(element);
-    });
+    banners= json['banners'];
+    product = json['product'];
   }
 }
 

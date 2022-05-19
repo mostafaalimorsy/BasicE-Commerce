@@ -16,13 +16,14 @@ void main() async {
   await CachHelper.init();
 
   Widget widget;
-  bool isSkiped = CachHelper.getData(key: 'onBoarding');
-  bool?  token = CachHelper.getData(key: 'token');
+  bool? isSkiped = CachHelper.getData(key: 'onBoarding');
+  bool? token = CachHelper.getData(key: 'token');
   print(isSkiped);
 
   if (isSkiped != null) {
     if(token != null) {
       widget = const HomeScreen();
+      print (token);
     } else {
       widget = LoginScreen();
     }
