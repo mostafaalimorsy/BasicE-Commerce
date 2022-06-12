@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iiii/constant.dart';
 import 'package:iiii/controller/service/dio_hellper.dart';
 import 'package:iiii/controller/shop/cubit/states.dart';
 import 'package:iiii/model/end_point.dart';
@@ -28,14 +29,16 @@ class ShopCubit extends Cubit<ShopStates>
     emit(BottomNavigationBarstate());
   }
   
-  HomeModel? homeModel;
+   HomeModel? homeModel;
   void getHomeData(){
     emit(ShopLoadingHomeDataStates());
 
-    DioHelper.getDataAPI(url: HOME , query: null).then((value) {
+    DioHelper.getDataAPI(url: HOME, token: token).then((value) {
+
 
       homeModel = HomeModel.fromjson(value.data);
-      print("object");
+      print (homeModel);
+
       emit(ShopSuccessHomeDataStates());
     });
 

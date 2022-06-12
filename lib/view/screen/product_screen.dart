@@ -14,10 +14,12 @@ class ProductScreen extends StatelessWidget {
       listener: (BuildContext context, state) {},
       builder: (BuildContext context, ShopStates state) {
         ShopCubit getData = ShopCubit.get(context);
+
         return ConditionalBuilder(
             condition:  getData.homeModel !=null,
-            builder: (context)=>Text("ddata"),
+            builder: (context)=> productsBuilderWidget(getData.homeModel),
             fallback: (context)=> Center(child:CircularProgressIndicator() ,)
+
         );
       },
     );
