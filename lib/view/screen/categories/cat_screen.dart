@@ -7,7 +7,7 @@ import 'package:iiii/view/widget/categories/cat_widget.dart';
 
 class CatScreen extends StatelessWidget {
   const CatScreen({Key? key}) : super(key: key);
-
+//1234
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ShopCubit, ShopStates>(
