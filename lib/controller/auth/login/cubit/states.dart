@@ -9,6 +9,7 @@ class ShopAppLoadingStates extends ShopAppLoginStates {}
 class ShopAppScuccessStates extends ShopAppLoginStates {
   final ShopLoginModel PostLogin;
 
+
   ShopAppScuccessStates(this.PostLogin);
 
 

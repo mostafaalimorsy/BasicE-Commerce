@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iiii/componans.dart';
-import 'package:iiii/view/screen/login_screen.dart';
-import 'package:iiii/view/widget/custom_auth_button.dart';
-import 'package:iiii/view/widget/custom_textformfield_widget.dart';
+import 'package:iiii/view/widget/custom_widget/custom_auth_button.dart';
+import 'package:iiii/view/widget/custom_widget/custom_textformfield_widget.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 
-import '../../controller/auth/login/cubit/cubit.dart';
-import '../../controller/auth/login/cubit/states.dart';
+import '../../../controller/auth/login/cubit/cubit.dart';
+import '../../../controller/auth/login/cubit/states.dart';
 
 class RigesterScreen extends StatelessWidget {
   var formKey = GlobalKey<FormState>();

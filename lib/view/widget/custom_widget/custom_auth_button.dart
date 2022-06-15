@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iiii/constant.dart';
+import 'package:iiii/controller/service/constant.dart';
 
 Widget authButton ({ required BuildContext context,  authButtonText ,VoidCallback? onpressed})=>  Container(
     width: MediaQuery.of(context).size.height,

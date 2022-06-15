@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iiii/controller/shop/cubit/cubit.dart';
 import 'package:iiii/controller/shop/cubit/states.dart';
-import 'package:iiii/view/widget/product_widget.dart';
+import 'package:iiii/view/widget/home/product_widget.dart';
 
 class ProductScreen extends StatelessWidget {
   const ProductScreen({Key? key}) : super(key: key);
@@ -16,8 +16,8 @@ class ProductScreen extends StatelessWidget {
         ShopCubit getData = ShopCubit.get(context);
 
         return ConditionalBuilder(
-            condition:  getData.homeModel !=null,
-            builder: (context)=> productsBuilderWidget(getData.homeModel),
+            condition:  getData.homeModel !=null && getData.catModel !=null,
+            builder: (context)=> productsBuilderWidget(getData.homeModel, getData.catModel),
             fallback: (context)=> Center(child:CircularProgressIndicator() ,)
 
         );

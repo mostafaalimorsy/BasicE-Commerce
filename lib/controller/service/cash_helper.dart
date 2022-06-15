@@ -33,6 +33,13 @@ class CachHelper
   }
 
 
+  static bool? getBoolData({
+    required String key,
+  })
+  {
+
+    return  sharedPreferences!.getBool(key);
+  }
 
 
 

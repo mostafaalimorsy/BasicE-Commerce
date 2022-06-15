@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:iiii/componans.dart';
-import 'package:iiii/constant.dart';
+import 'package:iiii/controller/service/componans.dart';
+import 'package:iiii/controller/service/constant.dart';
 import 'package:iiii/controller/service/cash_helper.dart';
 import 'package:iiii/model/boarding/boarding_model.dart';
-import 'package:iiii/view/screen/login_screen.dart';
-import 'package:iiii/view/widget/on_boarding_widget.dart';
+import 'package:iiii/view/screen/login/login_screen.dart';
+import 'package:iiii/view/widget/onBoarding/on_boarding_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen extends StatefulWidget {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iiii/componans.dart';
+import 'package:iiii/controller/service/componans.dart';
 import 'package:iiii/controller/shop/cubit/states.dart';
-import 'package:iiii/view/screen/search_screen.dart';
-import '../../controller/shop/cubit/cubit.dart';
+import 'package:iiii/view/screen/search/search_screen.dart';
+import '../../../controller/shop/cubit/cubit.dart';
 
 
 class HomeScreen extends StatelessWidget {

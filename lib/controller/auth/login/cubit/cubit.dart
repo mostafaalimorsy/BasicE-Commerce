@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iiii/controller/service/constant.dart';
 import 'package:iiii/controller/auth/login/cubit/states.dart';
 import 'package:iiii/controller/service/dio_hellper.dart';
 import 'package:iiii/model/auth/login_model.dart';
@@ -45,6 +46,7 @@ class ShopLoginCubit extends Cubit<ShopAppLoginStates> {
       data: {
         'email': email,
         'password': password,
+        'Authorization':token,
       },
     ).then((value){
       emit(ShopAppScuccessStates(ShopLoginModel.fromjson(value.data)));

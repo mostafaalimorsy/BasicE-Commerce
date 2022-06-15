@@ -1,3 +1,5 @@
+import 'package:iiii/model/favorites/add_fav_model.dart';
+
 abstract class ShopStates {}
 
 
@@ -14,3 +16,34 @@ class ShopErrorHomeDataStates extends ShopStates{
 }
 
 
+
+class ShopLoadingCategoriesDataStates extends ShopStates{}
+class ShopSuccessCategoriesDataStates extends ShopStates{}
+class ShopErrorCategoriesDataStates extends ShopStates{
+  final String error;
+  ShopErrorCategoriesDataStates(this.error);
+
+}
+
+
+class ShopLoadingFavDataStates extends ShopStates{}
+class ShopSuccessFavDataStates extends ShopStates{}
+class ShopErrorFavDataStates extends ShopStates{
+  final String error;
+  ShopErrorFavDataStates(this.error);
+
+}
+
+
+
+class ShopLoadingChangeFavDataStates extends ShopStates{}
+class ShopSuccessChangeFavDataStates extends ShopStates{
+  final FavModel model;
+
+  ShopSuccessChangeFavDataStates(this.model);
+}
+class ShopErrorChangeFavDataStates extends ShopStates{
+  final String error;
+  ShopErrorChangeFavDataStates(this.error);
+
+}
