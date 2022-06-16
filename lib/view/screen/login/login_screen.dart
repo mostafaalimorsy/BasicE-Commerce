@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iiii/controller/service/componans.dart';
+import 'package:iiii/controller/auth/login/cubit/cubit.dart';
+import 'package:iiii/controller/auth/login/cubit/states.dart';
 import 'package:iiii/controller/service/cash_helper.dart';
+import 'package:iiii/controller/service/componans.dart';
 import 'package:iiii/view/screen/home/home_screen.dart';
 import 'package:iiii/view/screen/rigester/rigester_screen.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:iiii/view/widget/custom_widget/custom_auth_button.dart';
 import 'package:iiii/view/widget/custom_widget/custom_text_buton.dart';
 import 'package:iiii/view/widget/custom_widget/custom_textformfield_widget.dart';
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import '../../../controller/auth/login/cubit/cubit.dart';
-import '../../../controller/auth/login/cubit/states.dart';
 
 class LoginScreen extends StatelessWidget {
   var formKey = GlobalKey<FormState>();
@@ -32,10 +32,10 @@ class LoginScreen extends StatelessWidget {
                 states: ToastStates.SUCCESS,
               );
 
-              CachHelper.saveData(key: 'token', value: state.PostLogin.data!.token)
+              CachHelper.saveData(key: 'token', value: true)
                   .then((value) {
-                    var token = state.PostLogin.data?.token;
-                    print(token);
+                var token = state.PostLogin.data?.token;
+                print(token);
                 navigatReplace(context, HomeScreen());
               });
             } else {
