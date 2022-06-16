@@ -32,7 +32,7 @@ class LoginScreen extends StatelessWidget {
                 states: ToastStates.SUCCESS,
               );
 
-              CachHelper.saveData(key: 'token', value: true)
+              CachHelper.saveData(key: 'token', value: state.PostLogin.data?.token)
                   .then((value) {
                 var token = state.PostLogin.data?.token;
                 print(token);
