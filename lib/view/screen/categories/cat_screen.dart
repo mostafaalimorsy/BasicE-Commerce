@@ -17,6 +17,7 @@ class CatScreen extends StatelessWidget {
         return ConditionalBuilder(
             condition: getData.catModel != null,
             builder: (context) => ListView.separated(
+              physics: BouncingScrollPhysics(),
                 itemBuilder: (context, index) => gridViewWidget(getData.catModel, index),
                 separatorBuilder: (context, index) => Divider(),
                 itemCount: getData.catModel!.data.data.length),

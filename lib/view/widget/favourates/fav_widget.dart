@@ -23,7 +23,7 @@ Widget BuildFavItem(FavoritesModel? model,index,context) => BlocConsumer<ShopCub
                   //
                   Image.network(
                     "${model.data!.data2[index].product!.image}",
-                    width: double.infinity,
+                    width: 100,
                     height: 200,
                   ),
                   // model.discount!=0

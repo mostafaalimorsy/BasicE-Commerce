@@ -17,12 +17,12 @@ class FavScreen extends StatelessWidget {
           return  ConditionalBuilder(
               condition: getData.favoritesModel!= null,
               builder: (context) => ListView.separated(
-                  physics:const BouncingScrollPhysics(),
+                  physics: BouncingScrollPhysics(),
                   itemBuilder: (context, index) => BuildFavItem(getData.favoritesModel,index,context),
                   separatorBuilder:  (context, index) => Container(height: 1,width: double.infinity,),
                   itemCount: ShopCubit.get(context).favoritesModel!.data!.data2.length),
-              fallback: (context) => Center(
-                child: CircularProgressIndicator(),
+              fallback: (context) => const Center(
+                child: Text("\“NO Favorites item yet, please browse the products First\”",style: TextStyle(color: Colors.grey),),
               ));
         });
   }
