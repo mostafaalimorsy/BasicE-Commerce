@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iiii/controller/auth/rigester/cubit.dart';
+import 'package:iiii/controller/auth/rigester/states.dart';
+import 'package:iiii/controller/service/cash_helper.dart';
+import 'package:iiii/controller/service/componans.dart';
+import 'package:iiii/controller/service/constant.dart';
+import 'package:iiii/view/screen/home/home_screen.dart';
 import 'package:iiii/view/widget/custom_widget/custom_auth_button.dart';
 import 'package:iiii/view/widget/custom_widget/custom_textformfield_widget.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-
-import '../../../controller/auth/login/cubit/cubit.dart';
-import '../../../controller/auth/login/cubit/states.dart';
 
 class RigesterScreen extends StatelessWidget {
   var formKey = GlobalKey<FormState>();
@@ -17,11 +20,38 @@ class RigesterScreen extends StatelessWidget {
     var namecontroller = TextEditingController();
     var phonecontroller = TextEditingController();
     return BlocProvider(
-      create: (BuildContext context) => ShopLoginCubit(),
-      child: BlocConsumer<ShopLoginCubit, ShopAppLoginStates>(
-        listener: (BuildContext context, ShopAppLoginStates state) {},
-        builder: (BuildContext context, ShopAppLoginStates state) {
-          ShopLoginCubit getData = ShopLoginCubit.get(context);
+      create: (BuildContext context) => ShopRigesterCubit(),
+      child: BlocConsumer<ShopRigesterCubit, ShopAppRigesterStates>(
+        listener: (BuildContext context, ShopAppRigesterStates state) {
+          if (state is ShopAppScuccessRigesterStates) {
+            if (state.getLogin.status == true) {
+
+              print(state.getLogin.message);
+              print(state.getLogin.data!.token);
+              msgAlarm(
+                msg: state.getLogin.message,
+                textColor: Colors.black,
+                states: ToastStates.SUCCESS,
+              );
+
+              CachHelper.saveData(key: 'token', value: state.getLogin.data?.token)
+                  .then((value) {
+                token = state.getLogin.data?.token;
+                print("token saved");
+                navigatReplace(context, HomeScreen());
+              });
+            } else {
+              print(state.getLogin.message);
+              msgAlarm(
+                msg: state.getLogin.message,
+                textColor: Colors.white,
+                states: ToastStates.ERROR,
+              );
+            }
+          }
+        },
+        builder: (BuildContext context, ShopAppRigesterStates state) {
+          ShopRigesterCubit getData = ShopRigesterCubit.get(context);
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.transparent,
@@ -122,7 +152,7 @@ class RigesterScreen extends StatelessWidget {
                             ),
                             //Login  Button
                             ConditionalBuilder(
-                              condition: state is! ShopAppLoadingStates,
+                              condition: state is ShopAppRigesterStates,
                               builder: (BuildContext context) {
                                 return authButton(
                                     context: context,
@@ -137,7 +167,7 @@ class RigesterScreen extends StatelessWidget {
                                         print(emailcontroller.text);
                                         print(passwdcontroller.text);
                                       }
-                                      Navigator.pop(context);
+                                      // Navigator.pop(context);
 
                                     });
                               },
@@ -147,17 +177,7 @@ class RigesterScreen extends StatelessWidget {
                             SizedBox(
                               height: 15,
                             ),
-                            //Rigester button
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.center,
-                            //   children: [
-                            //     Text("Don\'t have an account?"),
-                            //     CustomTextButton(
-                            //         context: context,
-                            //         route: RigeterScreen(),
-                            //         text: "RIGESTER"),
-                            //   ],
-                            // ),
+
                           ],
                         ),
                       ),

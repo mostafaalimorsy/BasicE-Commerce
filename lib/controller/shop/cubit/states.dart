@@ -1,3 +1,4 @@
+import 'package:iiii/model/auth/login_model.dart';
 import 'package:iiii/model/favorites/add_fav_model.dart';
 
 abstract class ShopStates {}
@@ -47,3 +48,17 @@ class ShopErrorChangeFavDataStates extends ShopStates{
   ShopErrorChangeFavDataStates(this.error);
 
 }
+
+
+class ShopUserDataStates extends ShopStates{}
+class ShopSuccessUserDataStates extends ShopStates{
+  final ShopLoginModel model;
+
+  ShopSuccessUserDataStates(this.model);
+}
+class ShopErrorUserDataStates extends ShopStates{
+  final String error;
+  ShopErrorUserDataStates(this.error);
+
+}
+

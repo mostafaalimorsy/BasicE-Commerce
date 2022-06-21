@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iiii/controller/service/constant.dart';
 import 'package:iiii/controller/service/dio_hellper.dart';
 import 'package:iiii/controller/shop/cubit/states.dart';
+import 'package:iiii/model/auth/login_model.dart';
 import 'package:iiii/model/categories/categories_model.dart';
 import 'package:iiii/model/end_point.dart';
 import 'package:iiii/model/favorites/add_fav_model.dart';
@@ -30,6 +31,8 @@ class ShopCubit extends Cubit<ShopStates>
   {
     currentIndex=index;
     emit(BottomNavigationBarstate());
+
+
   }
   
    HomeModel? homeModel;
@@ -106,6 +109,22 @@ class ShopCubit extends Cubit<ShopStates>
       print(favoritesModel!.data!.data2);
 
       emit(ShopSuccessFavDataStates());
+    });
+  }
+
+
+  ShopLoginModel? UserModel;
+  void GetUserData(){
+    emit(ShopUserDataStates ());
+
+    DioHelper.getDataAPI(
+        url: PROFILE,
+        token:  token
+    ).then((value) {
+      UserModel=ShopLoginModel.fromjson(value.data);
+      print(UserModel!.data!.name);
+
+      emit(ShopSuccessUserDataStates(UserModel!));
     });
   }
 

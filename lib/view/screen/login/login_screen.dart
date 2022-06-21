@@ -4,6 +4,7 @@ import 'package:iiii/controller/auth/login/cubit/cubit.dart';
 import 'package:iiii/controller/auth/login/cubit/states.dart';
 import 'package:iiii/controller/service/cash_helper.dart';
 import 'package:iiii/controller/service/componans.dart';
+import 'package:iiii/controller/service/constant.dart';
 import 'package:iiii/view/screen/home/home_screen.dart';
 import 'package:iiii/view/screen/rigester/rigester_screen.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
@@ -24,6 +25,7 @@ class LoginScreen extends StatelessWidget {
         listener: (BuildContext context, state) {
           if (state is ShopAppScuccessStates) {
             if (state.PostLogin.status == true) {
+
               print(state.PostLogin.message);
               print(state.PostLogin.data!.token);
               msgAlarm(
@@ -34,8 +36,8 @@ class LoginScreen extends StatelessWidget {
 
               CachHelper.saveData(key: 'token', value: state.PostLogin.data?.token)
                   .then((value) {
-                var token = state.PostLogin.data?.token;
-                print(token);
+                 token = state.PostLogin.data?.token;
+                print("token saved");
                 navigatReplace(context, HomeScreen());
               });
             } else {
