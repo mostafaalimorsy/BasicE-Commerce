@@ -22,7 +22,7 @@ class RigesterScreen extends StatelessWidget {
     return BlocProvider(
       create: (BuildContext context) => ShopRigesterCubit(),
       child: BlocConsumer<ShopRigesterCubit, ShopAppRigesterStates>(
-        listener: (BuildContext context, ShopAppRigesterStates state) {
+        listener: ( context,  state) {
           if (state is ShopAppScuccessRigesterStates) {
             if (state.getLogin.status == true) {
 
@@ -50,7 +50,7 @@ class RigesterScreen extends StatelessWidget {
             }
           }
         },
-        builder: (BuildContext context, ShopAppRigesterStates state) {
+        builder: ( context,  state) {
           ShopRigesterCubit getData = ShopRigesterCubit.get(context);
           return Scaffold(
             appBar: AppBar(

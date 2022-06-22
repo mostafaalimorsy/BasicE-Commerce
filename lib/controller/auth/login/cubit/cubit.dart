@@ -7,37 +7,38 @@ import 'package:iiii/model/auth/login_model.dart';
 
 import 'package:iiii/model/end_point.dart';
 
+
 class ShopLoginCubit extends Cubit<ShopAppLoginStates> {
   ShopLoginCubit() : super(IntialShopAppLoginStates ());
 
   static ShopLoginCubit get(context) => BlocProvider.of(context);
 
   ShopLoginModel? PostLogin ;
+  ShopLoginModel? GetLogin ;
   IconData suffix = Icons.visibility_outlined ;
   bool password = true;
 
 
-  //// Auth data TO API
-  // void getLogin({required String? email, required String? password,required String? name, required String? phone}) async {
-  //   emit(ShopAppLoadingRigesterStates());
-  //   DioHelper?.getDataAPI(
-  //     url: REGISTER,
-  //     query: {
-  //       'email':  email,
-  //       'password': password,
-  //       'name':name,
-  //       'phone':phone,
-  //     },
-  //   ).then((value) {
-  //      emit(ShopAppScuccessRigesterStates(PostLogin!));
-  //     var get_login = ShopLoginModel.fromjson(value.data);
-  //     print(get_login.data?.image.toString());
-  //   }).catchError((error){
-  //     emit(ShopAppErrorRigesterStates(error.toString()));
-  //   });
-  //
-  // }
-  // Auth data from API
+  void getLogin({required String? email, required String? password,required String? name, required String? phone}) async {
+    emit(ShopAppLoadingRigesterStates());
+    DioHelper?.getDataAPI(
+      url: REGISTER,
+      query: {
+        'email':  email,
+        'password': password,
+        'name':name,
+        'phone':phone,
+      },
+    ).then((value) {
+      emit(ShopAppScuccessRigesterStates(GetLogin!));
+      GetLogin= ShopLoginModel.fromjson(value.data);
+      print(GetLogin!.data?.image.toString());
+    }).catchError((error){
+      emit(ShopAppErrorRigesterStates(error.toString()));
+    });
+
+  }
+
   void postLogin({required String email , required String password })  {
     emit(ShopAppLoadingStates());
     DioHelper?.postDataAPI(

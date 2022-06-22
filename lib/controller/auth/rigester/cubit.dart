@@ -18,20 +18,21 @@ class ShopRigesterCubit extends Cubit<ShopAppRigesterStates> {
   //// Auth data TO API
   void getLogin({required String? email, required String? password,required String? name, required String? phone}) async {
     emit(ShopAppLoadingRigesterStates());
-    DioHelper?.getDataAPI(
+    DioHelper?.postDataAPI(
       url: REGISTER,
-      query: {
+      data: {
         'email':  email,
         'password': password,
         'name':name,
         'phone':phone,
       },
     ).then((value) {
+      print("2");
+      GetLogin= ShopLoginModel.fromjson(value.data);
+      print("3");
       emit(ShopAppScuccessRigesterStates(GetLogin!));
-      var get_login = ShopLoginModel.fromjson(value.data);
-      print(get_login.data?.image.toString());
-    }).catchError((error){
-      emit(ShopAppErrorRigesterStates(error.toString()));
+      print(GetLogin!.data!.token);
+      print("4");
     });
 
   }

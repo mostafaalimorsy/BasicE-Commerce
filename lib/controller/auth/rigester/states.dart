@@ -7,14 +7,7 @@ class IntialShopAppRigesterStates extends ShopAppRigesterStates {}
 class ShopAppLoadingRigesterStates extends ShopAppRigesterStates {}
 class ShopAppScuccessRigesterStates extends ShopAppRigesterStates {
   final ShopLoginModel getLogin;
-
-
   ShopAppScuccessRigesterStates(this.getLogin);
-
-
-
-
-
 }
 class ShopAppErrorRigesterStates extends ShopAppRigesterStates {
   final String error ;

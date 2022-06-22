@@ -26,3 +26,28 @@ class ShopAppErrorStates extends ShopAppLoginStates {
 
 class ShopChangPasswordVisabilityStates extends ShopAppLoginStates {}
 
+
+
+class ShopAppLoadingRigesterStates extends ShopAppLoginStates {}
+class ShopAppScuccessRigesterStates extends ShopAppLoginStates {
+  final ShopLoginModel getLogin;
+
+
+  ShopAppScuccessRigesterStates(this.getLogin);
+
+
+
+
+
+}
+class ShopAppErrorRigesterStates extends ShopAppLoginStates {
+  final String error ;
+  ShopAppErrorRigesterStates(this.error);
+
+
+}
+
+class ShopChangPasswordVisabilityRigesterStates extends ShopAppLoginStates {}
+
+
+
